@@ -6,7 +6,7 @@
 
   <groupId>com.austindoupnik.gnc4j</groupId>
   <artifactId>gnc4j</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
 
   <name>${project.artifactId}</name>
   <description>Java bindings for GnuCash shared libraries</description>
