@@ -1,13 +1,16 @@
 package com.austindoupnik.gnc4j.libgnucash.engine;
 
-import com.austindoupnik.gnc4j.glib.GLibGList;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
+import com.austindoupnik.gnc4j.libgnucash.engine.EngineSplit.Split;
 import com.sun.jna.Native;
+import com.sun.jna.Pointer;
 import com.sun.jna.PointerType;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
 
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncCommodity.*;
+import static com.austindoupnik.gnc4j.glib.GLibGList.GList;
+import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncCommodity.gnc_commodity;
 
 @UtilityClass
 public class EngineAccount {
@@ -97,8 +100,11 @@ public class EngineAccount {
 
   }
 
+  @NoArgsConstructor
   public static class Account extends PointerType {
-
+    public Account(final Pointer p) {
+      super(p);
+    }
   }
 
   public static class GNCPolicy extends PointerType {
@@ -202,7 +208,7 @@ public class EngineAccount {
    * This message string should be freed with g_free when no longer
    * needed.
    */
-  public static native String gnc_account_name_violations_errmsg(final String separator, final GLibGList.GList invalid_account_names);
+  public static native String gnc_account_name_violations_errmsg(final String separator, final GList invalid_account_names);
 
   /**
    * Runs through all the accounts and returns a list of account names
@@ -214,7 +220,7 @@ public class EngineAccount {
    * @return A GList of invalid account names. Should be freed with
    * g_list_free_full (value, g_free) when no longer needed.
    */
-  public static native GLibGList.GList gnc_account_list_name_violations(final QofBook book, final String separator);
+  public static native GList gnc_account_list_name_violations(final QofBook book, final String separator);
 
   public static native QofBook gnc_account_get_book(final Account account);
 
@@ -343,10 +349,6 @@ public class EngineAccount {
    * @param defer New value for the flag.
    */
   public static native void gnc_account_set_defer_bal_computation(final Account acc, final boolean defer);
-
-  public static class Split extends PointerType {
-
-  }
 
   /**
    * Insert the given split from an account.
@@ -479,9 +481,193 @@ public class EngineAccount {
   public static native void gnc_account_append_child(final Account new_parent, final Account child);
 
   /**
+   * This function will remove the specified child account from the
+   * specified parent account. It will NOT free the associated memory
+   * or otherwise alter the account: the account can now be reparented
+   * to a new location.  Note, however, that it will mark the old
+   * parents as having been modified.
+   *
+   * @param parent The parent account from which the child should be
+   *               removed.
+   * @param child  The child account to remove.
+   */
+  public static native void gnc_account_remove_child(final Account parent, final Account child);
+
+  /**
+   * This routine returns a pointer to the parent of the specified
+   * account.  If the account has no parent, i.e it is either the root
+   * node or is a disconnected account, then its parent will be NULL.
+   *
+   * @param account A pointer to any exiting account.
+   * @return A pointer to the parent account node, or NULL if there is
+   * no parent account.
+   */
+  public static native Account gnc_account_get_parent(final Account account);
+
+  /**
+   * This routine returns the root account of the account tree that the
+   * specified account belongs to.  It is the equivalent of repeatedly
+   * calling the gnc_account_get_parent() routine until that routine
+   * returns NULL.
+   *
+   * @param account A pointer to any existing account.
+   * @return The root node of the account tree to which this account
+   * belongs.  NULL if the account is not part of any account tree.
+   */
+  public static native Account gnc_account_get_root(final Account account);
+
+  /**
+   * This routine indicates whether the specified account is the root
+   * node of an account tree.
+   *
+   * @param account A pointer to any account.
+   * @return TRUE if this account is of type ROOT.  FALSE otherwise.
+   */
+  public static native boolean gnc_account_is_root(final Account account);
+
+  /**
+   * This routine returns a GList of all children accounts of the specified
+   * account.  This function only returns the immediate children of the
+   * specified account.  For a list of all descendant accounts, use the
+   * gnc_account_get_descendants() function.
+   * <p>
+   * If you are looking for the splits of this account, use
+   * xaccAccountGetSplitList() instead. This function here deals with
+   * children accounts inside the account tree.
+   *
+   * @param account The account whose children should be returned.
+   * @return A GList of account pointers, or NULL if there are no
+   * children accounts. It is the callers responsibility to free any returned
+   * list with the g_list_free() function.
+   */
+  public static native GList gnc_account_get_children(final Account account);
+
+  /**
+   * This routine returns a GList of all children accounts of the specified
+   * account, ordered by xaccAccountOrder().  \sa gnc_account_get_children()
+   */
+  public static native GList gnc_account_get_children_sorted(final Account account);
+
+  /**
+   * Return the number of children of the specified account.  The
+   * returned number does not include the account itself.
+   *
+   * @param account The account to query.
+   * @return The number of children of the specified account.
+   */
+  public static native int gnc_account_n_children(final Account account);
+
+  /**
+   * Return the index of the specified child within the list of the
+   * parent's children.  The first child index is 0.  This function
+   * returns -1 if the parent account is NULL of if the specified child
+   * does not belong to the parent account.
+   *
+   * @param parent The parent account to check.
+   * @param child  The child account to find.
+   * @return The index of the child account within the specified
+   * parent, or -1.
+   */
+  public static native int gnc_account_child_index(final Account parent, final Account child);
+
+  /**
+   * Return the n'th child account of the specified parent account.  If
+   * the parent account is not specified or the child index number is
+   * invalid, this function returns NULL.
+   *
+   * @param parent The parent account to check.
+   * @param num    The index number of the child account that should be
+   *               returned.
+   * @return A pointer to the specified child account, or NULL
+   */
+  public static native Account gnc_account_nth_child(final Account parent, final int num);
+
+  /**
+   * This routine returns a flat list of all of the accounts that are
+   * descendants of the specified account.  This includes not only the
+   * the children, but the children of the children, etc. For a list of
+   * only the immediate child accounts, use the
+   * gnc_account_get_children() function.  Within each set of child
+   * accounts, the accounts returned by this function are unordered.
+   * For a list of descendants where each set of children is sorted via
+   * the standard account sort function, use the
+   * gnc_account_get_descendants_sorted() function.
+   *
+   * @param account The account whose descendants should be returned.
+   * @return A GList of account pointers, or NULL if there are no
+   * descendants. It is the callers responsibility to free any returned
+   * list with the g_list_free() function.
+   */
+  public static native GList gnc_account_get_descendants(final Account account);
+
+  /**
+   * This function returns a GList containing all the descendants of
+   * the specified account, sorted at each level.  This includes not
+   * only the the children, but the children of the children, etc.
+   * Within each set of child accounts, the accounts returned by this
+   * function are ordered via the standard account sort function.  For
+   * a list of descendants where each set of children is unordered, use
+   * the gnc_account_get_descendants() function.
+   * <p>
+   * Note: Use this function where the results are intended for display
+   * to the user.  If the results are internal to GnuCash or will be
+   * resorted at some later point in time you should use the
+   * gnc_account_get_descendants() function.
+   *
+   * @param account The account whose descendants should be returned.
+   * @return A GList of account pointers, or NULL if there are no
+   * descendants. It is the callers responsibility to free any returned
+   * list with the g_list_free() function.
+   */
+  public static native GList gnc_account_get_descendants_sorted(final Account account);
+
+  /**
+   * Return the number of descendants of the specified account.  The
+   * returned number does not include the account itself.
+   *
+   * @param account The account to query.
+   * @return The number of descendants of the specified account.
+   */
+  public static native int gnc_account_n_descendants(final Account account);
+
+  /**
+   * Return the number of levels of this account below the root
+   * account.
+   *
+   * @param account The account to query.
+   * @return The number of levels below the root.
+   */
+  public static native int gnc_account_get_current_depth(final Account account);
+
+  /**
+   * Return the number of levels of descendants accounts below the
+   * specified account.  The returned number does not include the
+   * specified account itself.
+   *
+   * @param account The account to query.
+   * @return The number of levels of descendants.
+   */
+  public static native int gnc_account_get_tree_depth(final Account account);
+
+  /**
    * The gnc_account_lookup_full_name() subroutine works like
    * gnc_account_lookup_by_name, but uses fully-qualified names using the
    * given separator.
    */
   public static native Account gnc_account_lookup_by_full_name(final Account any_account, final String name);
+
+  /**
+   * The xaccAccountGetSplitList() routine returns a pointer to a GList of
+   * the splits in the account.
+   *
+   * @note This GList is the account's internal
+   * data structure: do not delete it when done; treat it as a read-only
+   * structure.  Note that some routines (such as xaccAccountRemoveSplit())
+   * modify this list directly, and could leave you with a corrupted
+   * pointer.
+   * @note This should be changed so that the returned value is a copy
+   * of the list. No other part of the code should have access to the
+   * internal data structure used by this object.
+   */
+  public static native GList xaccAccountGetSplitList(final Account account);
 }

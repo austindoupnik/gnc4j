@@ -1,6 +1,5 @@
 package com.austindoupnik.gnc4j.glib
 
-
 import spock.lang.Specification
 
 import static GLibGList.*

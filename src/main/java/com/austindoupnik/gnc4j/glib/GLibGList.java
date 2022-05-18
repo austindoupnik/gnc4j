@@ -1,10 +1,6 @@
 package com.austindoupnik.gnc4j.glib;
 
-import com.sun.jna.Callback;
-import com.sun.jna.IntegerType;
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.Structure;
+import com.sun.jna.*;
 import com.sun.jna.Structure.FieldOrder;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -18,7 +14,22 @@ import java.util.function.Function;
 @UtilityClass
 public class GLibGList {
   static {
-    Native.register("glib-2.0.0");
+    nativeRegister("glib-2.0.0", "glib-2.0");
+  }
+
+  private static void nativeRegister(final String... libNames) {
+    final List<UnsatisfiedLinkError> exs = new ArrayList<>();
+    for (final String libName : libNames) {
+      try {
+        Native.register(libName);
+        return;
+      } catch (final UnsatisfiedLinkError ex) {
+        exs.add(ex);
+      }
+    }
+    final RuntimeException ex = new RuntimeException("Unable to load library with name: " + String.join(", ", libNames));
+    exs.forEach(ex::addSuppressed);
+    throw ex;
   }
 
   public static <T> GList fromList(final List<T> elements, final Function<T, Pointer> converter) {

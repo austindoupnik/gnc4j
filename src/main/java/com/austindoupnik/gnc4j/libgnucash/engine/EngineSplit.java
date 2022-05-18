@@ -2,7 +2,9 @@ package com.austindoupnik.gnc4j.libgnucash.engine;
 
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineAccount.Account;
 import com.sun.jna.Native;
+import com.sun.jna.Pointer;
 import com.sun.jna.PointerType;
+import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
 
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncNumeric.gnc_numeric;
@@ -15,8 +17,11 @@ public class EngineSplit {
     Native.register("gnc-engine");
   }
 
+  @NoArgsConstructor
   public static class Split extends PointerType {
-
+    public Split(final Pointer p) {
+      super(p);
+    }
   }
 
   /**
@@ -25,6 +30,11 @@ public class EngineSplit {
   public static native Split xaccMallocSplit(final QofBook book);
 
   public static native void xaccSplitSetAccount(final Split split, final Account account);
+
+  /**
+   * Returns the parent transaction of the split.
+   */
+  public static native Transaction xaccSplitGetParent(final Split split);
 
   public static native void xaccSplitSetParent(final Split split, final Transaction trans);
 
@@ -47,7 +57,14 @@ public class EngineSplit {
    * @note If you use this on a newly created transaction, make sure
    * that the 'value' is also set so that it doesn't remain zero.
    */
-  public static native void xaccSplitSetAmount(final Split split, final gnc_numeric amount);
+  public static native void xaccSplitSetAmount(final Split split, final gnc_numeric.ByValue amount);
+
+  /**
+   * Returns the amount of the split in the account's commodity.
+   * Note that for cap-gains splits, this is slaved to the transaction
+   * that is causing the gains to occur.
+   */
+  public static native gnc_numeric.ByValue xaccSplitGetAmount(final Split split);
 
   /**
    * The xaccSplitSetValue() method sets the value of this split in the
@@ -57,6 +74,13 @@ public class EngineSplit {
    * that the 'amount' is also set so that it doesn't remain zero.
    */
   public static native void xaccSplitSetValue(final Split split, final gnc_numeric.ByValue value);
+
+  /**
+   * Returns the value of this split in the transaction's commodity.
+   * Note that for cap-gains splits, this is slaved to the transaction
+   * that is causing the gains to occur.
+   */
+  public static native gnc_numeric.ByValue xaccSplitGetValue(final Split split);
 
   /**
    * The xaccSplitSetSharePriceAndAmount() method will simultaneously

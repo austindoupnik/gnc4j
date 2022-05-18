@@ -10,7 +10,6 @@ public class EngineGncEngine {
     Native.register("gnc-engine");
   }
 
-
   /**
    * gnc_engine_init should be called before gnc engine
    * functions can be used.

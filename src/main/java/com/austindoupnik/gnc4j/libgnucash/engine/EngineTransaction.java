@@ -87,4 +87,9 @@ public class EngineTransaction {
   public static void xaccTransSetDate(final Transaction trans, final LocalDate d) {
     xaccTransSetDate(trans, d.getDayOfMonth(), d.getMonthValue(), d.getYear());
   }
+
+  /**
+   * Gets the transaction Description
+   */
+  public static native String xaccTransGetDescription(final Transaction trans);
 }

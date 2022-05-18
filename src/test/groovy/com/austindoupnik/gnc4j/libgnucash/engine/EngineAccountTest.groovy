@@ -1,19 +1,18 @@
 package com.austindoupnik.gnc4j.libgnucash.engine
 
-import com.austindoupnik.gnc4j.glib.GLibGList
 import spock.lang.Specification
 import spock.lang.TempDir
 
 import java.nio.file.Files
 import java.nio.file.Path
 
-import static EngineAccount.*
 import static EngineGncEngine.gnc_engine_init
-import static EngineQofSession.*
 import static EngineQofUtil.qof_close
 import static EngineQofUtil.qof_init
-import static com.austindoupnik.gnc4j.glib.GLibGList.*
+import static com.austindoupnik.gnc4j.glib.GLibGList.toList
+import static com.austindoupnik.gnc4j.libgnucash.engine.EngineAccount.*
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncSession.gnc_get_current_session
+import static com.austindoupnik.gnc4j.libgnucash.engine.EngineQofSession.*
 
 class EngineAccountTest extends Specification {
     def setupSpec() {
