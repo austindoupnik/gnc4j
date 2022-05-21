@@ -4,48 +4,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.austindoupnik.gnc4j</groupId>
+  <parent>
+    <groupId>com.austindoupnik.gnc4j</groupId>
+    <artifactId>parent-core</artifactId>
+    <version>0.0.4-SNAPSHOT</version>
+    <relativePath>parent/core/pom.xml</relativePath>
+  </parent>
+
   <artifactId>gnc4j</artifactId>
   <version>0.0.4-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>${project.artifactId}</name>
-  <description>Java bindings for GnuCash shared libraries</description>
-  <url>https://github.com/austindoupnik/gnc4j</url>
-
-  <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-
-  <developers>
-    <developer>
-      <name>Austin Doupnik</name>
-    </developer>
-  </developers>
-
-  <scm>
-    <url>https://github.com/austindoupnik/gnc4j/tree/main</url>
-    <connection>scm:git:git@github.com:austindoupnik/gnc4j.git</connection>
-    <developerConnection>scm:git:git@github.com:austindoupnik/gnc4j.git</developerConnection>
-  </scm>
-
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
 
   <modules>
     <module>bom</module>
     <module>glib</module>
     <module>jna-core</module>
     <module>libgnucash</module>
-    <module>parent</module>
+    <module>parent/core</module>
+    <module>parent/java</module>
     <module>tool</module>
   </modules>
 </project>
