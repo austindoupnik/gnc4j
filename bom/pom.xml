@@ -6,9 +6,9 @@
 
   <parent>
     <groupId>com.austindoupnik.gnc4j</groupId>
-    <artifactId>parent-java</artifactId>
+    <artifactId>parent-core</artifactId>
     <version>0.0.5-SNAPSHOT</version>
-    <relativePath>../parent/java/pom.xml</relativePath>
+    <relativePath>../parent/core/pom.xml</relativePath>
   </parent>
 
   <artifactId>bom</artifactId>
