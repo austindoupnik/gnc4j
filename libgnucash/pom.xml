@@ -7,12 +7,12 @@
   <parent>
     <groupId>com.austindoupnik.gnc4j</groupId>
     <artifactId>parent-java</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5-SNAPSHOT</version>
     <relativePath>../parent/java/pom.xml</relativePath>
   </parent>
 
   <artifactId>libgnucash</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.5-SNAPSHOT</version>
 
   <name>${project.artifactId}</name>
 
