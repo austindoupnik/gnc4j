@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>glib</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.4-SNAPSHOT</version>
 
   <name>${project.artifactId}</name>
   <description>Java bindings for GnuCash shared libraries</description>
@@ -14,7 +14,7 @@
   <parent>
     <groupId>com.austindoupnik.gnc4j</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
 
