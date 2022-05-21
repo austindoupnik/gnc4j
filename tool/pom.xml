@@ -4,14 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.austindoupnik.gnc4j</groupId>
-  <artifactId>gnc4j</artifactId>
+  <artifactId>tool</artifactId>
   <version>0.0.3-SNAPSHOT</version>
-  <packaging>pom</packaging>
 
   <name>${project.artifactId}</name>
   <description>Java bindings for GnuCash shared libraries</description>
   <url>https://github.com/austindoupnik/gnc4j</url>
+
+  <parent>
+    <groupId>com.austindoupnik.gnc4j</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.3-SNAPSHOT</version>
+    <relativePath>../parent/pom.xml</relativePath>
+  </parent>
 
   <licenses>
     <license>
@@ -40,12 +45,26 @@
     </snapshotRepository>
   </distributionManagement>
 
-  <modules>
-    <module>bom</module>
-    <module>glib</module>
-    <module>jna-core</module>
-    <module>libgnucash</module>
-    <module>parent</module>
-    <module>tool</module>
-  </modules>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>bom</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.zeroturnaround</groupId>
+      <artifactId>zt-exec</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>info.picocli</groupId>
+      <artifactId>picocli</artifactId>
+    </dependency>
+  </dependencies>
 </project>
