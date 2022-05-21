@@ -7,12 +7,12 @@
   <parent>
     <groupId>com.austindoupnik.gnc4j</groupId>
     <artifactId>parent-core</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.4</version>
     <relativePath>../core/pom.xml</relativePath>
   </parent>
 
   <artifactId>parent-java</artifactId>
-  <version>0.0.4-SNAPSHOT</version>
+  <version>0.0.4</version>
   <packaging>pom</packaging>
 
   <name>${project.artifactId}</name>
