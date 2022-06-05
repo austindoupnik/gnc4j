@@ -1,0 +1,10 @@
+services:
+  gnc4j-ci:
+    image: ghcr.io/austindoupnik/gnc4j-ci:latest
+    build:
+      context: .
+    network_mode: bridge
+    volumes:
+      - ../:/app
+    working_dir: /app
+    command: ./mvnw -ntp -DargLine="-Djna.library.path=/opt/gnucash-4.9/lib" test

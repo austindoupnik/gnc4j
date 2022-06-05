@@ -1,0 +1,31 @@
+name: Prepare development
+
+on:
+  workflow_dispatch:
+    inputs:
+      next-development-version:
+        required: true
+        type: string
+        description: The next version on which to begin development
+
+jobs:
+  set-next-development-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache local Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Set next development version
+        run: |
+          ./mvnw org.codehaus.mojo:versions-maven-plugin:2.11.0:set -DgenerateBackupPoms=false -DprocessAllModules=true -DnewVersion='${{ github.event.inputs.next-development-version }}'
+          version="$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)"
+          echo ::set-output name=version::"${version}"
+      - name: Push next development commit and tag
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Next development version ${{ steps.set-next-development-version.outputs.version }}"
