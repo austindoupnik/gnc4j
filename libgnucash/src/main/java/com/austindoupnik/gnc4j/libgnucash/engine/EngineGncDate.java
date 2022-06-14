@@ -1,6 +1,7 @@
 package com.austindoupnik.gnc4j.libgnucash.engine;
 
 import com.sun.jna.NativeLong;
+import com.sun.jna.ptr.NativeLongByReference;
 import lombok.experimental.UtilityClass;
 
 import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
@@ -17,7 +18,11 @@ public class EngineGncDate {
    * this stops working in 2038, we define our own:
    */
   public static class time64 extends NativeLong {
+    private static final long serialVersionUID = 350018756716653128L;
 
+    public static class ByReference extends NativeLongByReference {
+
+    }
   }
 
   /**

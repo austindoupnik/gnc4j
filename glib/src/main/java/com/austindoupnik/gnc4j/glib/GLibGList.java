@@ -1,7 +1,5 @@
 package com.austindoupnik.gnc4j.glib;
 
-import com.sun.jna.Callback;
-import com.sun.jna.IntegerType;
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 import com.sun.jna.Structure.FieldOrder;
@@ -53,20 +51,6 @@ public class GLibGList {
 
     public GList.ByReference next;
     public GList.ByReference prev;
-  }
-
-  public static class GUInt extends IntegerType {
-    public GUInt() {
-      this(0);
-    }
-
-    public GUInt(final long value) {
-      super(4, value, true);
-    }
-  }
-
-  public interface GFunc extends Callback {
-    void invoke(final Pointer data, final Pointer userData);
   }
 
   /**

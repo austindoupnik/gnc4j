@@ -1,5 +1,6 @@
 package com.austindoupnik.gnc4j.libgnucash.engine
 
+
 import spock.lang.Specification
 import spock.lang.TempDir
 
@@ -93,5 +94,23 @@ class EngineAccountTest extends Specification {
 
         then:
         result == ["good bye world", "hello world", "hello world"]
+    }
+
+    def "account string 'INCOME' converted to enum 'ACCT_TYPE_INCOME' by reference"() {
+        when:
+        def accountType = new GNCAccountType.ByReference()
+        def successful = xaccAccountStringToType("INCOME", accountType)
+
+        then:
+        successful
+        accountType.getValue() == GNCAccountType.ACCT_TYPE_INCOME
+    }
+
+    def "account string 'INCOME' converted to enum 'ACCT_TYPE_INCOME' by return"() {
+        when:
+        def accountType = xaccAccountStringToEnum("INCOME")
+
+        then:
+        accountType == GNCAccountType.ACCT_TYPE_INCOME
     }
 }
