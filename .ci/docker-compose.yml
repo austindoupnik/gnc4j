@@ -7,4 +7,4 @@ services:
     volumes:
       - ../:/app
     working_dir: /app
-    command: ./mvnw -ntp -DargLine="-Djna.library.path=/opt/gnucash-4.9/lib" test
+    command: ./mvnw -ntp -DargLine="-Djna.library.path=/opt/gnucash-4.9/lib" package

@@ -282,7 +282,7 @@ public class EngineAccount {
   /**
    * The xaccAccountOrder() subroutine defines a sorting order on
    * accounts.  It takes pointers to two accounts, and returns an int &lt; 0 if
-   * the first account is "less than" the second, returns an int > 0 if the
+   * the first account is "less than" the second, returns an int &gt; 0 if the
    * first is "greater than" the second, and 0 if they are equal.  To
    * determine the sort order, first the account codes are compared,
    * and if these are equal, then account types, then account
@@ -1185,7 +1185,7 @@ public class EngineAccount {
   );
 
   /**
-   * @see #gnc_account_lookup_by_type_and_commodity(Account, String, int, gnc_commodity)
+   * @see #gnc_account_lookup_by_type_and_commodity(Account, String, int, EngineGncCommodity.gnc_commodity)
    */
   public static GList gnc_account_lookup_by_type_and_commodity(
       final Account root,
@@ -1202,7 +1202,7 @@ public class EngineAccount {
    * Conversion routines for the account types to/from strings
    * that are used in persistent storage, communications.  These
    * strings should *not* be translated to the local language.
-   * Typical conversion is ACCT_TYPE_INCOME -> "INCOME".
+   * Typical conversion is ACCT_TYPE_INCOME -&gt; "INCOME".
    */
   public static native String xaccAccountTypeEnumAsString(final int type);
 
@@ -1217,7 +1217,7 @@ public class EngineAccount {
    * Conversion routines for the account types to/from strings
    * that are used in persistent storage, communications.  These
    * strings should *not* be translated to the local language.
-   * Typical conversion is "INCOME" -> ACCT_TYPE_INCOME.
+   * Typical conversion is "INCOME" -&gt; ACCT_TYPE_INCOME.
    */
   public static native boolean xaccAccountStringToType(final String str, final GNCAccountType.ByReference type);
 
@@ -1225,7 +1225,7 @@ public class EngineAccount {
    * Conversion routines for the account types to/from strings
    * that are used in persistent storage, communications.  These
    * strings should *not* be translated to the local language.
-   * Typical conversion is "INCOME" -> ACCT_TYPE_INCOME.
+   * Typical conversion is "INCOME" -&gt; ACCT_TYPE_INCOME.
    */
   public static native GNCAccountType xaccAccountStringToEnum(final String str);
 
@@ -1322,15 +1322,15 @@ public class EngineAccount {
 
   /**
    * The xaccAccountForEachTransaction() routine will traverse all of
-   * the transactions in @a account and call the callback
-   * function @a proc on each transaction.  Processing will continue
-   * if-and-only-if @a proc returns 0. The user data pointer
+   * the transactions in <i>account</i> and call the callback
+   * function <i>proc</i> on each transaction.  Processing will continue
+   * if-and-only-if <i>proc</i> returns 0. The user data pointer
    *
-   * @a data will be passed on to the callback function @a proc.
+   * <i>data</i> will be passed on to the callback function @a proc.
    * <p>
    * This function does not descend recursively to traverse transactions
    * in child accounts.
-   * @a proc will be called exactly once for each transaction that is
+   * <i>proc</i> will be called exactly once for each transaction that is
    * pointed to by at least one split in the given account.
    * <p>
    * The result of this function will be 0 <em>if and only if</em>
@@ -1759,10 +1759,10 @@ public class EngineAccount {
   public static native boolean xaccTransactionTraverse(final Transaction trans, final int stage);
 
   /**
-   * xaccAccountStagedTransactionTraversal() calls @a thunk on each
-   * transaction in account @a a whose current marker is less than the
-   * given @a stage and updates each transaction's marker to be @a stage.
-   * The traversal will stop if @a thunk returns a non-zero value.
+   * xaccAccountStagedTransactionTraversal() calls <i>thunk</i> on each
+   * transaction in account <i>a</i> whose current marker is less than the
+   * given <i>stage</i> and updates each transaction's marker to be @a stage.
+   * The traversal will stop if <i>thunk</i> returns a non-zero value.
    * xaccAccountStagedTransactionTraversal() function will return zero
    * or the non-zero value returned by @a thunk.
    * This API does not handle handle recursive traversals.
@@ -1779,12 +1779,12 @@ public class EngineAccount {
   );
 
   /**
-   * gnc_account_tree_staged_transaction_traversal() calls @a thunk on each
+   * gnc_account_tree_staged_transaction_traversal() calls <i>thunk</i> on each
    * transaction in the group whose current marker is less than the
-   * given @a stage and updates each transaction's marker to be @a stage.
-   * The traversal will stop if @a thunk returns a non-zero value.
+   * given <i>stage</i> and updates each transaction's marker to be @a stage.
+   * The traversal will stop if <i>thunk</i> returns a non-zero value.
    * gnc_account_tree_staged_transaction_traversal() function will return zero
-   * or the non-zero value returned by @a thunk.  This
+   * or the non-zero value returned by <i>thunk.</i>  This
    * API does not handle handle recursive traversals.
    * <p>
    * \warning For performance reasons, the transaction callback @a thunk
@@ -1800,11 +1800,11 @@ public class EngineAccount {
 
   /**
    * Traverse all of the transactions in the given account group.
-   * Continue processing IF @a proc returns 0. This function
+   * Continue processing IF <i>proc</i> returns 0. This function
    * will descend recursively to traverse transactions in the
    * children of the accounts in the group.
    *
-   * @a Proc will be called exactly once for each transaction that is
+   * <i>Proc</i> will be called exactly once for each transaction that is
    * pointed to by at least one split in any account in the hierarchy
    * topped by the root Account @a acc.
    * <p>
