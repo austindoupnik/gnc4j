@@ -1,8 +1,11 @@
 package com.austindoupnik.gnc4j.libgnucash.engine;
 
+import com.austindoupnik.gnc4j.jna_core.JnaEnum;
 import com.sun.jna.Callback;
 import com.sun.jna.PointerType;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.UtilityClass;
 
 import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
@@ -21,8 +24,9 @@ public class EngineQofSession {
    * values in the same order, i.e. ignore_lock = 1 &lt;&lt; 2, create = 1 &lt;&lt; 1, and
    * force = 1.
    */
-  @AllArgsConstructor
-  public enum SessionOpenMode {
+  @Getter
+  @RequiredArgsConstructor
+  public enum SessionOpenMode implements JnaEnum<SessionOpenMode> {
     /**
      * Open will fail if the URI doesn't exist or is locked.
      */
@@ -57,13 +61,6 @@ public class EngineQofSession {
 
   public interface QofPercentageFunc extends Callback {
     void invoke(final String message, final double percent);
-  }
-
-  /**
-   * @see #qof_session_begin(QofSession, String, int)
-   */
-  public static void qof_session_begin(final QofSession session, final String new_uri, final SessionOpenMode mode) {
-    qof_session_begin(session, new_uri, mode.value);
   }
 
   /**
@@ -104,7 +101,7 @@ public class EngineQofSession {
    *                application-specific directories or URI schemes as well.
    * @param mode    The SessionOpenMode.
    */
-  public static native void qof_session_begin(final QofSession session, final String new_uri, final int mode);
+  public static native void qof_session_begin(final QofSession session, final String new_uri, final SessionOpenMode mode);
 
   /**
    * The qof_session_load() method causes the QofBook to be made ready to

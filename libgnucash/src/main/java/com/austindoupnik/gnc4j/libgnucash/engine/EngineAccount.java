@@ -348,16 +348,9 @@ public class EngineAccount {
   public static native QofBook gnc_account_get_book(final Account account);
 
   /**
-   * @see #xaccAccountSetType(Account, int)
-   */
-  public static void xaccAccountSetType(final Account account, final GNCAccountType type) {
-    xaccAccountSetType(account, type.value);
-  }
-
-  /**
    * Set the account's type
    */
-  public static native void xaccAccountSetType(final Account account, final int type);
+  public static native void xaccAccountSetType(final Account account, final GNCAccountType type);
 
   /**
    * Set the account's name
@@ -1180,21 +1173,9 @@ public class EngineAccount {
   public static native GList gnc_account_lookup_by_type_and_commodity(
       final Account root,
       final String name,
-      final int acctype,
-      final gnc_commodity commodity
-  );
-
-  /**
-   * @see #gnc_account_lookup_by_type_and_commodity(Account, String, int, EngineGncCommodity.gnc_commodity)
-   */
-  public static GList gnc_account_lookup_by_type_and_commodity(
-      final Account root,
-      final String name,
       final GNCAccountType acctype,
       final gnc_commodity commodity
-  ) {
-    return gnc_account_lookup_by_type_and_commodity(root, name, acctype.value, commodity);
-  }
+  );
 
   /* GNCAccountType conversion/checking */
 
@@ -1204,14 +1185,7 @@ public class EngineAccount {
    * strings should *not* be translated to the local language.
    * Typical conversion is ACCT_TYPE_INCOME -&gt; "INCOME".
    */
-  public static native String xaccAccountTypeEnumAsString(final int type);
-
-  /**
-   * @see #xaccAccountTypeEnumAsString(int)
-   */
-  public static String xaccAccountTypeEnumAsString(final GNCAccountType type) {
-    return xaccAccountTypeEnumAsString(type.value);
-  }
+  public static native String xaccAccountTypeEnumAsString(final GNCAccountType type);
 
   /**
    * Conversion routines for the account types to/from strings

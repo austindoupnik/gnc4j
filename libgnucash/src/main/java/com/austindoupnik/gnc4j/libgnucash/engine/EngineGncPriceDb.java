@@ -1,10 +1,13 @@
 package com.austindoupnik.gnc4j.libgnucash.engine;
 
+import com.austindoupnik.gnc4j.jna_core.JnaEnum;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncCommodity.gnc_commodity;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncNumeric.gnc_numeric;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
 import com.sun.jna.PointerType;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.UtilityClass;
 
 import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
@@ -25,8 +28,9 @@ public class EngineGncPriceDb {
    * PRICE_SOURCE_EDIT_DLG will overwrite one with PRICE_SOURCE_FQ but not the
    * other way around.
    */
-  @AllArgsConstructor
-  public enum PriceSource {
+  @Getter
+  @RequiredArgsConstructor
+  public enum PriceSource implements JnaEnum<PriceSource> {
     /**
      * "user:price-editor"
      */
@@ -96,14 +100,7 @@ public class EngineGncPriceDb {
 
   public static native void gnc_price_set_time64(final GNCPrice p, EngineGncDate.time64 t);
 
-  public static native void gnc_price_set_source(final GNCPrice p, final int source);
-
-  /**
-   * @see #gnc_price_set_source(GNCPrice, int)
-   */
-  public static void gnc_price_set_source(final GNCPrice p, final PriceSource source) {
-    gnc_price_set_source(p, source.value);
-  }
+  public static native void gnc_price_set_source(final GNCPrice p, final PriceSource source);
 
   public static native void gnc_price_set_source_string(final GNCPrice p, final String s);
 
