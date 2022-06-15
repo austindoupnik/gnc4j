@@ -6,7 +6,7 @@
 
   <groupId>com.austindoupnik.gnc4j</groupId>
   <artifactId>parent-core</artifactId>
-  <version>0.0.5</version>
+  <version>0.0.6-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>${project.artifactId}</name>
