@@ -108,6 +108,21 @@
               <placement>a</placement>
               <head>Note:</head>
             </tag>
+            <tag>
+              <name>notes</name>
+              <placement>a</placement>
+              <head>Notes:</head>
+            </tag>
+            <tag>
+              <name>warning</name>
+              <placement>a</placement>
+              <head>Warning:</head>
+            </tag>
+            <tag>
+              <name>brief</name>
+              <placement>a</placement>
+              <head>Brief:</head>
+            </tag>
           </tags>
         </configuration>
       </plugin>

@@ -1,11 +1,10 @@
 package com.austindoupnik.gnc4j.libgnucash.engine;
 
 import com.austindoupnik.gnc4j.jna_core.JnaEnum;
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncCommodity.gnc_commodity;
+import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.gnc_commodity;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncNumeric.gnc_numeric;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
 import com.sun.jna.PointerType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.UtilityClass;

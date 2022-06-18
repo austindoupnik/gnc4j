@@ -1,22 +1,18 @@
 package com.austindoupnik.gnc4j.libgnucash.engine;
 
-import com.sun.jna.PointerType;
 import lombok.experimental.UtilityClass;
 
 import java.time.LocalDate;
 
 import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncCommodity.gnc_commodity;
+import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.Transaction;
+import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.gnc_commodity;
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
 
 @UtilityClass
 public class EngineTransaction {
   static {
     nativeRegister(EngineTransaction.class, "gnc-engine");
-  }
-
-  public static class Transaction extends PointerType {
-
   }
 
   /**
@@ -82,7 +78,7 @@ public class EngineTransaction {
   public static native void xaccTransSetDate(final Transaction trans, final int day, final int mon, final int year);
 
   /**
-   * @see #xaccTransSetDate(Transaction, int, int, int)
+   * @see #xaccTransSetDate(EngineGncEngine.Transaction, int, int, int)
    */
   public static void xaccTransSetDate(final Transaction trans, final LocalDate d) {
     xaccTransSetDate(trans, d.getDayOfMonth(), d.getMonthValue(), d.getYear());

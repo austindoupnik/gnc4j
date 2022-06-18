@@ -3,10 +3,7 @@ package com.austindoupnik.gnc4j.libgnucash.engine;
 import com.austindoupnik.gnc4j.glib.*;
 import com.austindoupnik.gnc4j.jna_core.JnaEnum;
 import com.austindoupnik.gnc4j.jna_core.UnsignedInt;
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.GNCLot;
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.LotList;
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.SplitList;
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.TransactionCallback;
+import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.*;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncNumeric.gnc_numeric;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineSplit.Split;
@@ -21,10 +18,26 @@ import lombok.experimental.UtilityClass;
 
 import static com.austindoupnik.gnc4j.glib.GLibGList.GList;
 import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncCommodity.gnc_commodity;
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncDate.time64;
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineTransaction.Transaction;
+import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.Transaction;
 
+/**
+ * Account
+ * Splits are grouped into Accounts which are also known
+ * as "Ledgers" in accounting practice. Each Account consists of a list of
+ * Splits that debit that Account. To ensure consistency, if a Split points
+ * to an Account, then the Account must point to the Split, and vice-versa.
+ * A Split can belong to at most one Account. Besides merely containing a
+ * list of Splits, the Account structure also gives the Account a name, a
+ * code number, description and notes fields, a key-value frame, a pointer
+ * to the commodity that is used for all splits in this account. The
+ * commodity can be the name of anything traded and tradeable: a stock
+ * (e.g. "IBM", "McDonald's"), a currency (e.g. "USD", "GBP"), or
+ * anything added to the commodity table.
+ * Accounts can be arranged in a hierarchical tree.  By accounting
+ * convention, the value of an Account is equal to the value of all of its
+ * Splits plus the value of all of its sub-Accounts.
+ */
 @UtilityClass
 @SuppressWarnings("unused")
 public class EngineAccount {

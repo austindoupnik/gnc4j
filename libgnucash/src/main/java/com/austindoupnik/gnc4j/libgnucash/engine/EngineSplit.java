@@ -9,7 +9,7 @@ import lombok.experimental.UtilityClass;
 import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncNumeric.gnc_numeric;
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineTransaction.Transaction;
+import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.Transaction;
 
 @UtilityClass
 public class EngineSplit {
