@@ -17,7 +17,7 @@ public class EngineGncEngine {
     nativeRegister(EngineGncEngine.class, "gnc-engine");
   }
 
-  interface TransactionCallback extends Callback {
+  public interface TransactionCallback extends Callback {
     GInt invoke(final Transaction t, final Pointer data);
   }
 

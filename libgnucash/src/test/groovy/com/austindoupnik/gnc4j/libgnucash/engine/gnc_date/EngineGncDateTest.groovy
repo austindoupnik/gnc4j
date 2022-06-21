@@ -1,14 +1,13 @@
-package com.austindoupnik.gnc4j.libgnucash.engine
+package com.austindoupnik.gnc4j.libgnucash.engine.gnc_date
 
-import com.sun.jna.JnaNativeString
+
 import com.sun.jna.Memory
-import jdk.nashorn.internal.objects.NativeString
 import spock.lang.Specification
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncDate.*
+import static com.austindoupnik.gnc4j.libgnucash.engine.gnc_date.EngineGncDate.*
 
 class EngineGncDateTest extends Specification {
     def "should print today date"() {

@@ -1,13 +1,14 @@
 package com.austindoupnik.gnc4j.libgnucash.engine;
 
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineAccount.Account;
+import com.austindoupnik.gnc4j.libgnucash.engine.account.Account;
 import com.sun.jna.Pointer;
 import com.sun.jna.PointerType;
 import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
 
 import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncNumeric.gnc_numeric;
+
+import com.austindoupnik.gnc4j.libgnucash.engine.gnc_numeric.gnc_numeric;
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.Transaction;
 

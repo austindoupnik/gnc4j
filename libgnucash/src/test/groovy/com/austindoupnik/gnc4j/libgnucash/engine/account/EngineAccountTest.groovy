@@ -1,5 +1,4 @@
-package com.austindoupnik.gnc4j.libgnucash.engine
-
+package com.austindoupnik.gnc4j.libgnucash.engine.account
 
 import spock.lang.Specification
 import spock.lang.TempDir
@@ -7,11 +6,11 @@ import spock.lang.TempDir
 import java.nio.file.Files
 import java.nio.file.Path
 
-import static EngineGncEngine.gnc_engine_init
-import static EngineQofUtil.qof_close
-import static EngineQofUtil.qof_init
 import static com.austindoupnik.gnc4j.glib.GLibGList.toList
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineAccount.*
+import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.gnc_engine_init
+import static com.austindoupnik.gnc4j.libgnucash.engine.EngineQofUtil.qof_close
+import static com.austindoupnik.gnc4j.libgnucash.engine.EngineQofUtil.qof_init
+import static com.austindoupnik.gnc4j.libgnucash.engine.account.EngineAccount.*
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncSession.gnc_get_current_session
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineQofSession.*
 

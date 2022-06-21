@@ -2,8 +2,9 @@ package com.austindoupnik.gnc4j.libgnucash.engine;
 
 import com.austindoupnik.gnc4j.jna_core.JnaEnum;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.gnc_commodity;
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncNumeric.gnc_numeric;
+import com.austindoupnik.gnc4j.libgnucash.engine.gnc_numeric.gnc_numeric;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
+import com.austindoupnik.gnc4j.libgnucash.engine.gnc_date.time64;
 import com.sun.jna.PointerType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -97,7 +98,7 @@ public class EngineGncPriceDb {
 
   public static native void gnc_price_set_currency(final GNCPrice p, final gnc_commodity c);
 
-  public static native void gnc_price_set_time64(final GNCPrice p, EngineGncDate.time64 t);
+  public static native void gnc_price_set_time64(final GNCPrice p, time64 t);
 
   public static native void gnc_price_set_source(final GNCPrice p, final PriceSource source);
 

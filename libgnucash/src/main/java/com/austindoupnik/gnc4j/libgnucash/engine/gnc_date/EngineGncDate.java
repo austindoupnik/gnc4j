@@ -1,17 +1,11 @@
-package com.austindoupnik.gnc4j.libgnucash.engine;
+package com.austindoupnik.gnc4j.libgnucash.engine.gnc_date;
 
 import com.austindoupnik.gnc4j.glib.GConstPointer;
 import com.austindoupnik.gnc4j.glib.GInt;
 import com.austindoupnik.gnc4j.glib.GSize;
 import com.austindoupnik.gnc4j.glib.GUInt;
-import com.austindoupnik.gnc4j.jna_core.JnaEnum;
 import com.austindoupnik.gnc4j.jna_core.SizeT;
-import com.sun.jna.NativeLong;
 import com.sun.jna.Pointer;
-import com.sun.jna.PointerType;
-import com.sun.jna.ptr.NativeLongByReference;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.UtilityClass;
 
 import static com.austindoupnik.gnc4j.glib.GLibGDate.GDate;
@@ -22,119 +16,6 @@ import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
 public class EngineGncDate {
   static {
     nativeRegister(EngineGncDate.class, "gnc-engine");
-  }
-
-  public static class tm extends PointerType {
-
-  }
-
-  /**
-   * Many systems, including Microsoft Windows and BSD-derived Unixes
-   * like Darwin, are retaining the int-32 typedef for time_t. Since
-   * this stops working in 2038, we define our own:
-   */
-  public static class time64 extends NativeLong {
-    private static final long serialVersionUID = 350018756716653128L;
-
-    public static class ByReference extends NativeLongByReference {
-
-    }
-  }
-
-  /**
-   * Enum for determining a date format
-   */
-  @Getter
-  @RequiredArgsConstructor
-  public enum QofDateFormat implements JnaEnum<QofDateFormat> {
-    /**
-     * United states: mm/dd/yyyy
-     */
-    QOF_DATE_FORMAT_US(0),
-    /**
-     * Britain: dd/mm/yyyy
-     */
-    QOF_DATE_FORMAT_UK(1),
-    /**
-     * Continental Europe: dd.mm.yyyy
-     */
-    QOF_DATE_FORMAT_CE(2),
-    /**
-     * ISO: yyyy-mm-dd
-     */
-    QOF_DATE_FORMAT_ISO(3),
-    /**
-     * Take from locale information
-     */
-    QOF_DATE_FORMAT_LOCALE(4),
-    /**
-     * UTC: 2004-12-12T23:39:11Z
-     */
-    QOF_DATE_FORMAT_UTC(5),
-    /**
-     * Used by the check printing code
-     */
-    QOF_DATE_FORMAT_CUSTOM(6),
-    /**
-     * No Fancy Date Format, use Global
-     */
-    QOF_DATE_FORMAT_UNSET(7);
-
-    public static QofDateFormat findByValue(final int v) {
-      return JnaEnum.findByValue(QofDateFormat.class, v);
-    }
-
-    public static class ByReference extends JnaEnumByReference<QofDateFormat> {
-      @Override
-      protected QofDateFormat findByValue(int value) {
-        return QofDateFormat.findByValue(value);
-      }
-    }
-
-    private final int value;
-  }
-
-  /**
-   * Enum for date completion modes (for dates entered without year)
-   */
-  @Getter
-  @RequiredArgsConstructor
-  public enum QofDateCompletion implements JnaEnum<QofDateCompletion> {
-    /**
-     * use current year
-     */
-    QOF_DATE_COMPLETION_THISYEAR(0),
-    /**
-     * use sliding 12-month window
-     */
-    QOF_DATE_COMPLETION_SLIDING(1);
-
-    private final int value;
-  }
-
-  /**
-   * This is how to format the month, as a number, an abbreviated string,
-   * or the full name.
-   */
-  @Getter
-  @RequiredArgsConstructor
-  public enum GNCDateMonthFormat implements JnaEnum<GNCDateMonthFormat> {
-    GNCDATE_MONTH_NUMBER(0),
-    GNCDATE_MONTH_ABBREV(1),
-    GNCDATE_MONTH_NAME(2);
-
-    public static GNCDateMonthFormat findByValue(final int v) {
-      return JnaEnum.findByValue(GNCDateMonthFormat.class, v);
-    }
-
-    public static class ByReference extends JnaEnumByReference<GNCDateMonthFormat> {
-      @Override
-      protected GNCDateMonthFormat findByValue(int value) {
-        return GNCDateMonthFormat.findByValue(value);
-      }
-    }
-
-    private final int value;
   }
 
   /* Replacements for POSIX functions which use time_t. Time_t is still
