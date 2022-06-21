@@ -10,7 +10,8 @@ import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
 
 import com.austindoupnik.gnc4j.libgnucash.engine.gnc_numeric.gnc_numeric;
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.Transaction;
+
+import com.austindoupnik.gnc4j.libgnucash.engine.gnc_engine.Transaction;
 
 @UtilityClass
 public class EngineSplit {

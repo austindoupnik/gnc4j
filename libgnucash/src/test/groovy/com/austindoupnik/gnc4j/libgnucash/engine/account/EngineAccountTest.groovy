@@ -7,7 +7,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 import static com.austindoupnik.gnc4j.glib.GLibGList.toList
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.gnc_engine_init
+import static com.austindoupnik.gnc4j.libgnucash.engine.gnc_engine.EngineGncEngine.gnc_engine_init
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineQofUtil.qof_close
 import static com.austindoupnik.gnc4j.libgnucash.engine.EngineQofUtil.qof_init
 import static com.austindoupnik.gnc4j.libgnucash.engine.account.EngineAccount.*

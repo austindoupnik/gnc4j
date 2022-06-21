@@ -1,7 +1,7 @@
 package com.austindoupnik.gnc4j.libgnucash.engine;
 
 import com.austindoupnik.gnc4j.jna_core.JnaEnum;
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.gnc_commodity;
+import com.austindoupnik.gnc4j.libgnucash.engine.gnc_engine.gnc_commodity;
 import com.austindoupnik.gnc4j.libgnucash.engine.gnc_numeric.gnc_numeric;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
 import com.austindoupnik.gnc4j.libgnucash.engine.gnc_date.time64;

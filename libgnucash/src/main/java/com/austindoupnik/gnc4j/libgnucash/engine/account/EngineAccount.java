@@ -3,7 +3,7 @@ package com.austindoupnik.gnc4j.libgnucash.engine.account;
 import com.austindoupnik.gnc4j.glib.*;
 import com.austindoupnik.gnc4j.jna_core.JnaEnum;
 import com.austindoupnik.gnc4j.jna_core.UnsignedInt;
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.*;
+import com.austindoupnik.gnc4j.libgnucash.engine.gnc_engine.*;
 import com.austindoupnik.gnc4j.libgnucash.engine.gnc_numeric.gnc_numeric;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineSplit.Split;
@@ -19,7 +19,6 @@ import static com.austindoupnik.gnc4j.glib.GLibGList.GList;
 import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
 
 import com.austindoupnik.gnc4j.libgnucash.engine.gnc_date.time64;
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.Transaction;
 
 /**
  * Account

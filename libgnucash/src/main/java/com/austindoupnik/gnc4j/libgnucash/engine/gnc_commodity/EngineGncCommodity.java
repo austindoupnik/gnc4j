@@ -2,8 +2,8 @@ package com.austindoupnik.gnc4j.libgnucash.engine.gnc_commodity;
 
 import com.austindoupnik.gnc4j.glib.GInt;
 import com.austindoupnik.gnc4j.glib.GUInt;
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.gnc_commodity;
-import com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.gnc_commodity_table;
+import com.austindoupnik.gnc4j.libgnucash.engine.gnc_engine.gnc_commodity;
+import com.austindoupnik.gnc4j.libgnucash.engine.gnc_engine.gnc_commodity_table;
 import com.austindoupnik.gnc4j.libgnucash.engine.EngineQofBook.QofBook;
 import com.sun.jna.Callback;
 import com.sun.jna.Pointer;
@@ -14,8 +14,9 @@ import static com.austindoupnik.gnc4j.glib.GLibGList.GList;
 import static com.austindoupnik.gnc4j.jna_core.NativeRegister.nativeRegister;
 
 import com.austindoupnik.gnc4j.libgnucash.engine.account.GncGUID;
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.gnc_commodity_namespace;
-import static com.austindoupnik.gnc4j.libgnucash.engine.EngineGncEngine.gnc_quote_source;
+import com.austindoupnik.gnc4j.libgnucash.engine.gnc_engine.gnc_commodity_namespace;
+
+import com.austindoupnik.gnc4j.libgnucash.engine.gnc_engine.gnc_quote_source;
 
 import com.austindoupnik.gnc4j.libgnucash.engine.gnc_numeric.gnc_numeric;
 
